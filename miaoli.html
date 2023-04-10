@@ -1,0 +1,406 @@
+<!DOCTYPE html>>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="jia-yin">
+        <meta name="description" content="旅遊網站練習設置">
+        <title>Miaoli Travel</title>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();   
+            });
+            let sum=0;
+            function like() {
+                alert("按讚成功");
+                sum=sum+1;
+                document.getElementById("likenumber").innerHTML=sum
+            };
+            let sums=0;
+            function shopcart(){
+                let no = document.getElementById("nothing");
+                let add = document.getElementById("addcart");
+                let total = document.getElementById("totalcart");
+                let messages = document.getElementById("message");
+                let cashtotal = document.getElementById("cashtotal");
+                cashtotal.style.display="block";
+                no.style.display="none";
+                add.style.display="block";
+                total.style.display="block";
+                messages.style.display="block";
+            };
+            function totalshopcart(){
+                let allprices =[];
+                let table1 = document.getElementById("table1");
+                let tablenumber = document.getElementsByTagName("td").length;
+                for (let i=5;i<tablenumber;i=i+4){
+                    let td = table1.getElementsByTagName("td")[i];
+                    let prices = Number(td.textContent);
+                    allprices.push(prices);
+                };
+                console.log(allprices);
+                let total=0
+                for(let j=0;j<allprices.length;j=j+1){
+                    total=total+allprices[j];
+                };
+            console.log(total);
+            document.querySelector(".td2").innerHTML=total;
+            };
+            let addee=0;
+            function addmiaoli(){
+                addee=addee+1;
+                if (addee>=2){
+                    alert("重複加入");
+                    addee=addee-1;
+                    return false;   
+                }
+                else{
+                    alert("加入成功");
+                    sums=sums+1;
+                    const newtable = document.getElementById("tr1");
+                    let newtr = '<tr id="adde"><th id="th1">苗栗旅遊</th><td id="td1"><input id="inputnumbere" type="number" require value="1" step="1" min="1" max="100"></td><td id="td1">2900</td><td id="td1">2900</td><td id="tddd1"><button type="button" id="deletebutton"><img id="garbage" src="garbage.jpg" alt="垃圾桶"></img></button></td></tr>';
+                    newtable.insertAdjacentHTML("afterend",newtr);
+                    document.getElementById("inputnumbere").addEventListener("click",input);
+                    document.getElementById("message").innerHTML=sums;
+                    function input(){
+                        const inputnumber = document.getElementById("inputnumbere").value;
+                        const add = document.getElementById("adde");
+                        const td1 = add.getElementsByTagName("td")[1];
+                        const price = Number(td1.textContent);           
+                        const td2 = add.getElementsByTagName("td")[2];
+                        td2.innerHTML=inputnumber*price;
+                    };
+                    document.getElementById("cashtotal").addEventListener("click",cashtotal);
+                    function cashtotal(){
+                        alert("結帳成功");
+                        addee=addee-1;
+                        sums=0;
+                        const adde = document.getElementById("adde")
+                        adde.remove();
+                        let no = document.getElementById("nothing");
+                        let add = document.getElementById("addcart");
+                        let total = document.getElementById("totalcart");
+                        let messages = document.getElementById("message");
+                        let cashtotal = document.getElementById("cashtotal");
+                        cashtotal.style.display="none";
+                        no.style.display="block";
+                        add.style.display="none";
+                        total.style.display="none";
+                        messages.style.display="none";
+                    };
+                    document.getElementById("deletebutton").addEventListener("click",deletee);
+                    function deletee(){
+                        const add = document.getElementById("adde");
+                        add.remove();
+                        alert("刪除成功");
+                        addee=addee-1;
+                        sums=sums-1;
+                        document.getElementById("message").innerHTML=sums;
+                        if (sums==0){
+                            let no = document.getElementById("nothing");
+                            let add = document.getElementById("addcart");
+                            let total = document.getElementById("totalcart");
+                            let messages = document.getElementById("message");
+                            let cashtotal = document.getElementById("cashtotal");
+                            cashtotal.style.display="none";
+                            no.style.display="block";
+                            add.style.display="none";
+                            total.style.display="none";
+                            messages.style.display="none";
+                        };
+                    };
+                };
+            };
+            function deletebutton(){
+                let cancelbutton =document.getElementById("deletebutton")
+                
+            };
+            
+            const myModal = document.getElementById('myModal')
+            const myInput = document.getElementById('myInput')
+            myModal.addEventListener('shown.bs.modal', () => {
+            myInput.focus()
+            });
+            
+        </script>
+        <style>
+            .titleh1{display: flex;
+                     align-items: center;
+                     justify-content: center;
+                     padding-top: 20px;
+                     }
+            body{background-image:url("https://bpic.588ku.com/back_origin_min_pic/19/04/12/a781c9abb7ccc614ef5024fd70b9ce6e.jpg!/fw/750/quality/99/unsharp/true/compress/true");
+                 background-size: cover;
+                 font-family:微軟正黑體;
+                 font-weight: bolder;}
+            #table1{margin-left: auto;
+                  margin-right: auto;
+                  font-size: 18px;
+                  text-align: center;
+                  border-bottom: 1px solid rgb(12, 12, 12);
+                  }
+            #th1{width: 180px;
+               font-weight: bolder;
+               height: 20px;
+               padding: 10px;
+               }     
+            #td1{width: 140px;
+               height: 20px;
+               padding: 10px;
+               }
+            #inputnumbere{border:none;
+                         text-align: right;
+            }
+            #tdd1{width: 30px;
+               height: 30px;
+               }
+            #deletebutton{
+                    width: 40px;
+                    height: 40px;
+                    border-color:transparent;
+                    border: none;
+                    background-color: transparent;
+                    padding: 1px;
+               }
+            #garbage{
+                height: 70%;
+                width: 70%;
+                position: relative;
+                top: 1px;
+                bottom:1px;
+            }
+            .table2{margin-left: auto;
+                  margin-right: auto;
+                  font-size: 28px;
+                  text-align: center;
+                  }
+            .th2{width: 200px;
+               font-weight: bolder;
+               height: 30px;
+               padding: 5px;
+               }     
+            .td2{width: 200px;
+               height: 30px;
+               padding: 5px;
+               }         
+            h2{font-weight: bold;
+               }
+            .nav-link:hover{font-size: 20px;
+                            font-family:微軟正黑體;
+                            font-weight: bolder;
+                            padding: 10px;
+                            border:1px solid rgb(4, 51, 4);
+                            background-color: rgb(28, 116, 28);
+                            cursor: pointer;}
+            .div0{display: flex;
+                  justify-content: center;
+            }
+            .div1{border: 2px solid;
+                  border-radius: 25px;
+                  margin-right: 20px;
+                  background-color:white; 
+                  display: flex;
+                 }
+            .div2{overflow:hidden;
+                  border-top-left-radius: 25px;
+                  border-bottom-left-radius: 25px;
+                  opacity: 0.8;
+                 }
+            .div3{display: block;
+                  height: 400px;
+                  width: 500px;
+                  background-color:rgb(204, 252, 206);
+                  border-top-right-radius: 25px;
+                  border-bottom-right-radius: 25px;
+                 }
+            .div4{text-align: center;
+                  margin-top: 8px;
+                  margin-bottom: 8px;
+                  font-size: 30px;}
+            .div5{text-align: center;
+                  font-size: 20px;
+                  height: 291px;}
+            .div6{margin-top: 5px;
+                  margin-bottom: 5px;
+                 }
+            .price{margin-top: 2px;
+                  text-align: center;
+                  justify-content: center;
+                  font-size: 18px;}
+            del{color: red;
+                }
+            .div7{background-color: rgb(240, 188, 121);
+                  padding: 5px;
+                  border-bottom-right-radius: 25px;
+                  display: flex;
+                  justify-content: space-around;
+                  }
+            .img{height:400px;
+                 width:400px;
+                 border-top-left-radius: 25px;
+                 border-bottom-left-radius: 25px;
+                }
+            .img:hover{transform: scale(1.2,1.2);  
+                      }
+            .div4:hover{text-decoration: underline;
+                      }
+        </style>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    </head>
+    <body>
+        <header>
+          <div style="background-color: #95f083">
+            <h1 class="titleh1">歡迎大家出門探索台灣各個角落</h1>
+            <hr>
+            <nav class="navbar navbar-expand-lg" >
+                <div class="container-fluid">
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link" href="travel.html">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="travel.htmltravel.html#north">北部</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="travel.html#medium">中部</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="travel.html#south">南部</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="travel.html#east">東部</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="travel.html#island">離島</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <button type="button" class="btn btn-link position-relative" style="padding:0.5px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="dark" class="bi bi-cart" viewBox="0 0 16 16" style="padding: 1px;">
+                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/> 
+                                </svg>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="message" style="display: none;">1
+                                    <span class="visually-hidden">unread messages</span>
+                                </span>
+                            </button>
+                        </a>
+
+                          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div role="document" class="modal-dialog modal-dialog-scrollable">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-3 fw-bolder" id="staticBackdropLabel">購物車內容</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="text-center h6 mt-4 text-secondary" id="nothing">
+                                        目前尚未選購商品唷！
+                                    </div>
+                                    <div style="display: none;" id="addcart">
+                                        <table id="table1">
+                                            <tr id="tr1">
+                                                <th id="th1">商品名稱</th>
+                                                <td id="td1">數量</td>
+                                                <td id="td1">價錢</td>
+                                                <td id="td1">總價</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                <div class="modal-footer">
+                                    <table class="table2" id="totalcart" style="display: none;">
+                                        <tr>
+                                            <th class="th2" onclick="totalshopcart()">總計</th>
+                                            <td class="td2">0</td>
+                                        </tr>
+                                    </table>
+                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">關閉</button>
+                                    <button type="button" class="btn btn-success" id="cashtotal" style="display: none;">結帳</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+            </div>
+        </header>
+        <main>
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="日月潭.jpg" class="d-block w-100" alt="日月潭">
+                </div>
+                <div class="carousel-item">
+                  <img src="101煙火.jpg" class="d-block w-100" alt="放煙火中的101">
+                </div>
+                <div class="carousel-item">
+                  <img src="宜蘭明池.jpg" class="d-block w-100" alt="宜蘭明池">
+                </div>
+                <div class="carousel-item">
+                    <img src="田野風景.jpg" class="d-block w-100" alt="田野風景">
+                </div>
+                <div class="carousel-item">
+                    <img src="花蓮縱谷普悠瑪.jpg" class="d-block w-100" alt="花東縱谷普悠瑪">
+                </div>
+              </div>
+              <button class="carousel-control-prev " type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon position-absolute top-50 start-0 translate-middle-y" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next " type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon position-absolute top-50 end-0 translate-middle-y" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+        </main>
+        <br>
+        <div class="div0">
+            <div class="div1">
+                <div class="div2"><img class="img" src="苗栗風景.jpg" alt="苗栗龍騰斷橋"></div>
+                <div class="div3">
+                    <div class="div4" >苗栗旅行</div>
+                    <div class="div5">
+                        <h4><i>Day1</i></h4>
+                        <div class="div6">烏嘎彥竹林→洗水坑老街→大湖採草莓</div>
+                        <h4><i>Day2</i></h4>                
+                        <div class="div6">明德水庫→雅聞七里香玫瑰森林→後龍好望角</div>
+                    </div>
+                    <div class="div7">
+                        <div class="price"><del>$3300</del>$2900</div>
+                        <div>
+                          <div type="button" class="btn btn-success mx-2" onclick="shopcart();addmiaoli()">加入購物車</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <footer class="bg-success bg-opacity-75 py-4 pt-3">
+          <div class="container d-flex justify-content-center">
+              <div class="mx-2 text-dark fw-bolder">Copyright 2022 TRAVEL TAIWN</div>
+              <div>
+                  <div id="liveAlertPlaceholder" data-toggle="tooltip" data-placement="top" title="請按讚">
+                      <svg onclick="like()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
+                          <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+                      </svg>
+                      
+                  </div>
+              </div>
+              <div class="mx-2 text-dark fw-bold">按讚人數</div>
+              <div class="text-dark fw-bold" id="likenumber">0</div>
+          </div>
+      </footer>
+    </body>
